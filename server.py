@@ -12,7 +12,7 @@ NVIDIA_API_KEY = os.getenv("NVIDIA_API_KEY")
 
 @app.route("/")
 def index():
-    return send_from_directory(".", "prompt_warrior (1).html")
+    return send_from_directory(".", "prompt_warrior.html")
 
 
 @app.route("/api/forge", methods=["POST"])
