@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt Warrior — Forge Elite Prompts</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #E8A820;
+    --gold-dark: #B87A0A;
+    --ember: #D95030;
+    --ember-light: #F07050;
+    --coal: #0E0E0E;
+    --iron: #1A1A1A;
+    --steel: #2A2A2A;
+    --smoke: #3A3A3A;
+    --ash: #888;
+    --parchment: #F5EDD8;
+    --parchment-dim: #D4C89A;
+    --white: #FAFAF8;
+  }
+
+  body {
+    background: var(--coal);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  .header {
+    padding: 48px 40px 32px;
+    border-bottom: 1px solid var(--steel);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .logo-group { display: flex; flex-direction: column; gap: 6px; }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    line-height: 1;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-shadow: 0 0 60px rgba(232,168,32,0.25);
+  }
+
+  .logo span { color: var(--ember-light); }
+
+  .tagline {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ash);
+    font-weight: 300;
+  }
+
+  .rank-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .rank-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--ash); }
+
+  .rank-display {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: var(--ash);
+    transition: color 0.5s, text-shadow 0.5s;
+  }
+
+  .rank-display.bronze { color: #CD7F32; }
+  .rank-display.silver { color: #C0C0C0; }
+  .rank-display.gold   { color: var(--gold); text-shadow: 0 0 20px rgba(232,168,32,0.5); }
+  .rank-display.legendary { color: var(--ember-light); text-shadow: 0 0 30px rgba(217,80,48,0.7); }
+
+  /* MAIN LAYOUT */
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: calc(100vh - 160px);
+  }
+
+  .panel {
+    padding: 40px;
+    position: relative;
+  }
+
+  .panel-left { border-right: 1px solid var(--steel); }
+
+  .panel-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ash);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .panel-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--steel);
+  }
+
+  textarea {
+    width: 100%;
+    height: 200px;
+    background: var(--iron);
+    border: 1px solid var(--smoke);
+    border-radius: 4px;
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    padding: 18px;
+    resize: none;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  textarea:focus { border-color: var(--gold-dark); }
+
+  textarea::placeholder { color: var(--ash); }
+
+  .forge-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 16px;
+    background: var(--gold);
+    color: var(--coal);
+    border: none;
+    border-radius: 2px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .forge-btn:hover { background: #F0B830; }
+  .forge-btn:active { transform: scale(0.99); }
+  .forge-btn:disabled { background: var(--smoke); color: var(--ash); cursor: not-allowed; }
+
+  .forge-btn .btn-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .flame-icon { font-size: 20px; }
+
+  /* TECHNIQUES */
+  .techniques {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .technique-tag {
+    padding: 4px 12px;
+    border-radius: 2px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: 1px solid transparent;
+    opacity: 0.3;
+    transition: opacity 0.4s, border-color 0.4s, color 0.4s;
+  }
+
+  .technique-tag.active {
+    opacity: 1;
+  }
+
+  .technique-tag.context    { border-color: #5B8FD4; color: #5B8FD4; }
+  .technique-tag.specificity{ border-color: var(--gold); color: var(--gold); }
+  .technique-tag.constraints{ border-color: #8F5BD4; color: #8F5BD4; }
+  .technique-tag.format     { border-color: #4BAF78; color: #4BAF78; }
+  .technique-tag.persona    { border-color: var(--ember-light); color: var(--ember-light); }
+  .technique-tag.examples   { border-color: #D45B8F; color: #D45B8F; }
+  .technique-tag.cot        { border-color: #D4AF5B; color: #D4AF5B; }
+  .technique-tag.negatives  { border-color: #5BD4D4; color: #5BD4D4; }
+
+  /* OUTPUT */
+  .output-box {
+    background: var(--iron);
+    border: 1px solid var(--smoke);
+    border-radius: 4px;
+    padding: 18px;
+    min-height: 200px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--parchment);
+    white-space: pre-wrap;
+    word-break: break-word;
+    position: relative;
+  }
+
+  .output-placeholder {
+    color: var(--ash);
+    font-family: 'DM Sans', sans-serif;
+    font-style: italic;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+  }
+
+  .output-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--gold);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 0.9s step-end infinite;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* EXPLANATION */
+  .explanation-box {
+    margin-top: 20px;
+    padding: 16px 18px;
+    background: rgba(232,168,32,0.06);
+    border-left: 2px solid var(--gold-dark);
+    border-radius: 0 4px 4px 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--parchment-dim);
+    display: none;
+  }
+
+  .explanation-box.visible { display: block; }
+  .explanation-title {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  /* COPY BUTTON */
+  .copy-btn {
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--smoke);
+    color: var(--ash);
+    border-radius: 2px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    display: none;
+  }
+
+  .copy-btn.visible { display: inline-block; }
+  .copy-btn:hover { border-color: var(--gold-dark); color: var(--gold); }
+
+  /* POWER METER */
+  .power-section { margin-top: 28px; }
+  .power-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ash);
+    margin-bottom: 10px;
+  }
+
+  .power-bars { display: flex; gap: 4px; }
+
+  .power-bar {
+    flex: 1;
+    height: 6px;
+    border-radius: 1px;
+    background: var(--steel);
+    transition: background 0.4s;
+  }
+
+  .power-bar.lit-gold   { background: var(--gold); }
+  .power-bar.lit-ember  { background: var(--ember-light); }
+
+  /* LOADING ANIMATION */
+  .loading-text {
+    color: var(--ash);
+    font-size: 13px;
+    letter-spacing: 2px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+  /* DIVIDER LABEL */
+  .vs-divider {
+    position: absolute;
+    left: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--coal);
+    padding: 8px 4px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: var(--smoke);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    z-index: 10;
+  }
+
+  /* FOOTER */
+  .footer {
+    padding: 20px 40px;
+    border-top: 1px solid var(--steel);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-note {
+    font-size: 11px;
+    color: var(--ash);
+    letter-spacing: 0.5px;
+  }
+
+  .footer-note strong { color: var(--gold); }
+
+  /* EXAMPLE PROMPTS */
+  .examples-row {
+    margin-top: 16px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .example-pill {
+    padding: 5px 12px;
+    border: 1px solid var(--steel);
+    border-radius: 20px;
+    font-size: 11px;
+    color: var(--ash);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    background: transparent;
+  }
+
+  .example-pill:hover { border-color: var(--gold-dark); color: var(--gold); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .main { grid-template-columns: 1fr; }
+    .panel-left { border-right: none; border-bottom: 1px solid var(--steel); }
+    .panel-right .vs-divider { display: none; }
+    .logo { font-size: 48px; }
+    .header, .panel { padding: 28px 20px; }
+    .footer { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo-group">
+    <h1 class="logo">Prompt <span>Forge</span></h1>
+    <p class="tagline">Mini Challenge — I am a Prompt Warrior</p>
+  </div>
+  <div class="rank-badge">
+    <span class="rank-label">Warrior Rank</span>
+    <span class="rank-display" id="rankDisplay">—</span>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- LEFT: INPUT -->
+  <section class="panel panel-left">
+    <p class="panel-label">Weak Prompt — Enter Below</p>
+
+    <textarea id="weakPrompt"
+      placeholder="Type a basic, rough prompt here...&#10;&#10;e.g. Write an email about the meeting"></textarea>
+
+    <div class="examples-row">
+      <button class="example-pill" onclick="setExample('Write a blog post about AI')">blog post</button>
+      <button class="example-pill" onclick="setExample('Explain machine learning')">explain ML</button>
+      <button class="example-pill" onclick="setExample('Help me write a resume')">resume help</button>
+      <button class="example-pill" onclick="setExample('Give me marketing ideas')">marketing ideas</button>
+    </div>
+
+    <button class="forge-btn" id="forgeBtn" onclick="forgePrompt()">
+      <span class="btn-inner">
+        <span class="flame-icon">⚔</span>
+        <span>Forge It</span>
+      </span>
+    </button>
+
+    <div class="power-section">
+      <p class="power-label">Prompt Power Level</p>
+      <div class="power-bars" id="powerBars">
+        <!-- 10 bars dynamically updated -->
+      </div>
+    </div>
+
+    <div class="techniques" id="techniques">
+      <span class="technique-tag context"    data-key="context">Context</span>
+      <span class="technique-tag specificity" data-key="specificity">Specificity</span>
+      <span class="technique-tag constraints" data-key="constraints">Constraints</span>
+      <span class="technique-tag format"     data-key="format">Output Format</span>
+      <span class="technique-tag persona"    data-key="persona">Persona</span>
+      <span class="technique-tag examples"   data-key="examples">Examples</span>
+      <span class="technique-tag cot"        data-key="cot">Chain-of-Thought</span>
+      <span class="technique-tag negatives"  data-key="negatives">Negatives</span>
+    </div>
+  </section>
+
+  <!-- RIGHT: OUTPUT -->
+  <section class="panel panel-right" style="position:relative;">
+    <div class="vs-divider">VS</div>
+    <p class="panel-label">Forged Prompt — Elite Version</p>
+
+    <div class="output-box" id="outputBox">
+      <div class="output-placeholder" id="placeholder">
+        Enter a prompt and click Forge It →
+      </div>
+    </div>
+
+    <button class="copy-btn" id="copyBtn" onclick="copyPrompt()">⧉ Copy Forged Prompt</button>
+
+    <div class="explanation-box" id="explanationBox">
+      <p class="explanation-title">⚔ Warrior Analysis</p>
+      <p id="explanationText"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p class="footer-note">Powered by <strong>NVIDIA Llama 3.1 70B</strong> · Google Prompt Wars 2026</p>
+  <p class="footer-note" style="font-size:10px;">Techniques: Context · Specificity · Constraints · Output Format · Persona · Examples · Chain-of-Thought · Negatives</p>
+</footer>
+
+<script>
+const NVIDIA_API_KEY = "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"; // ← Paste your NVIDIA API key here
+
+const TECHNIQUES_ALL = ['context','specificity','constraints','format','persona','examples','cot','negatives'];
+const RANKS = ['—','RECRUIT','BRONZE','SILVER','GOLD','LEGENDARY'];
+const RANK_CLASSES = ['','','bronze','silver','gold','legendary'];
+
+let forgedPromptText = '';
+
+// Build power bars
+const barsContainer = document.getElementById('powerBars');
+for(let i = 0; i < 10; i++){
+  const b = document.createElement('div');
+  b.className = 'power-bar';
+  b.id = `bar${i}`;
+  barsContainer.appendChild(b);
+}
+
+function setPower(level) {
+  for(let i = 0; i < 10; i++){
+    const el = document.getElementById(`bar${i}`);
+    el.className = 'power-bar';
+    if(i < level) {
+      el.classList.add(level >= 8 ? 'lit-ember' : 'lit-gold');
+    }
+  }
+  const rankIdx = level <= 0 ? 0 : level <= 2 ? 1 : level <= 4 ? 2 : level <= 6 ? 3 : level <= 8 ? 4 : 5;
+  const rd = document.getElementById('rankDisplay');
+  rd.textContent = RANKS[rankIdx];
+  rd.className = `rank-display ${RANK_CLASSES[rankIdx]}`;
+}
+
+function activateTechniques(list) {
+  TECHNIQUES_ALL.forEach(t => {
+    const el = document.querySelector(`.technique-tag[data-key="${t}"]`);
+    if(el) el.classList.toggle('active', list.includes(t));
+  });
+}
+
+function setExample(text) {
+  document.getElementById('weakPrompt').value = text;
+}
+
+function copyPrompt() {
+  if(forgedPromptText) {
+    navigator.clipboard.writeText(forgedPromptText).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => btn.textContent = '⧉ Copy Forged Prompt', 1500);
+    });
+  }
+}
+
+async function forgePrompt() {
+  const weak = document.getElementById('weakPrompt').value.trim();
+  if(!weak) return;
+
+  const btn = document.getElementById('forgeBtn');
+  const outputBox = document.getElementById('outputBox');
+  const placeholder = document.getElementById('placeholder');
+  const copyBtn = document.getElementById('copyBtn');
+  const explanationBox = document.getElementById('explanationBox');
+  const explanationText = document.getElementById('explanationText');
+
+  btn.disabled = true;
+  btn.querySelector('span.btn-inner').innerHTML = '<span class="loading-text">FORGING...</span>';
+  setPower(0);
+  activateTechniques([]);
+  copyBtn.classList.remove('visible');
+  explanationBox.classList.remove('visible');
+  forgedPromptText = '';
+
+  outputBox.innerHTML = '<div class="output-placeholder" id="placeholder"><span class="loading-text">Heating the forge...</span></div>';
+
+  const systemPrompt = `You are a master prompt engineer — a "Prompt Warrior". Your job is to transform weak, vague prompts into powerful, elite prompts.
+
+You MUST respond with ONLY valid JSON — no markdown, no backticks, no preamble. Format:
+{
+  "forged_prompt": "the upgraded prompt text here",
+  "techniques_used": ["context","specificity","constraints","format","persona","examples","cot","negatives"],
+  "power_level": 7,
+  "analysis": "2-3 sentence explanation of the key improvements made"
+}
+
+Technique definitions (only list ones actually used):
+- context: added background info or purpose
+- specificity: made the request more precise and detailed  
+- constraints: added limits (length, tone, audience, scope)
+- format: specified output format (list, table, markdown, etc.)
+- persona: added role or persona for the AI
+- examples: added examples or few-shot patterns
+- cot: added chain-of-thought or step-by-step reasoning instruction
+- negatives: added what NOT to do
+
+power_level: integer 1-10 based on how much you improved the prompt.
+The forged_prompt should be substantive and impressive — 3-8x longer than the original.`;
+
+  try {
+    const response = await fetch("/api/forge", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "meta/llama-3.1-70b-instruct",
+        max_tokens: 1000,
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: `Weak prompt to forge: "${weak}"` }
+        ]
+      })
+    });
+
+    const data = await response.json();
+
+    // Check if the API returned an error
+    if (!response.ok) {
+      const errMsg = data.error?.message || data.error || JSON.stringify(data);
+      throw new Error(`API error (${response.status}): ${errMsg}`);
+    }
+
+    const raw = data.choices?.[0]?.message?.content || '';
+
+    let parsed;
+    try {
+      const clean = raw.replace(/```json|```/g, '').trim();
+      parsed = JSON.parse(clean);
+    } catch(e) {
+      console.log('Raw LLM response:', raw);
+      throw new Error('Could not parse LLM response. Check console for raw output.');
+    }
+
+    forgedPromptText = parsed.forged_prompt || '';
+
+    // Stream the forged prompt char by char for effect
+    outputBox.innerHTML = '';
+    const cursor = document.createElement('span');
+    cursor.className = 'output-cursor';
+
+    let i = 0;
+    const speed = Math.max(8, Math.min(30, forgedPromptText.length / 60));
+
+    function typeNext() {
+      if(i < forgedPromptText.length) {
+        outputBox.textContent = forgedPromptText.slice(0, i+1);
+        outputBox.appendChild(cursor);
+        i++;
+        setTimeout(typeNext, speed);
+      } else {
+        cursor.remove();
+        // Show techniques and power
+        const techniques = parsed.techniques_used || [];
+        const power = Math.min(10, Math.max(1, parseInt(parsed.power_level) || 5));
+
+        activateTechniques(techniques);
+        setPower(power);
+
+        explanationText.textContent = parsed.analysis || '';
+        explanationBox.classList.add('visible');
+        copyBtn.classList.add('visible');
+      }
+    }
+    typeNext();
+
+  } catch(err) {
+    outputBox.innerHTML = `<span style="color:var(--ember-light)">Error: ${err.message}. Check API key / network.</span>`;
+  } finally {
+    btn.disabled = false;
+    btn.querySelector('span.btn-inner').innerHTML = '<span class="flame-icon">⚔</span><span>Forge Again</span>';
+  }
+}
+
+// Allow Enter+Ctrl to submit
+document.getElementById('weakPrompt').addEventListener('keydown', e => {
+  if(e.key === 'Enter' && (e.ctrlKey || e.metaKey)) forgePrompt();
+});
+
+// Init bars
+setPower(0);
+</script>
+</body>
+</html>
