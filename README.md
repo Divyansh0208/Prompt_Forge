@@ -6,6 +6,9 @@
   <p><strong>Transform weak prompts into elite, production-ready prompts using NVIDIA Llama 3.1 70B</strong></p>
 
   <p>
+    <a href="https://prompt-forge-o970.onrender.com">
+      <img src="https://img.shields.io/badge/Live_Demo-Visit_Now-00C853?style=for-the-badge" alt="Live Demo"/>
+    </a>
     <img src="https://img.shields.io/badge/Built_for-Google_Prompt_Wars_2026-FF6D00?style=for-the-badge" alt="Prompt Wars 2026"/>
     <img src="https://img.shields.io/badge/Model-Llama_3.1_70B-76B900?style=for-the-badge&logo=nvidia" alt="Llama 3.1 70B"/>
     <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License"/>
@@ -23,9 +26,19 @@
 
 **[→ Try Prompt Forge Live](https://prompt-forge-o970.onrender.com)**
 
+Paste a weak prompt → Hit Forge It → Watch the magic ✨
+
 ---
 
-## 🛠️ Built With — Prompt Forging Tech Stack
+## 📸 Screenshots
+
+### ⚔️ Forge Interface — Prompt Engineering Tool with NVIDIA Llama 3.1
+
+![Prompt Forge Interface](screenshots/prompt-forge.jpg)
+
+---
+
+## 🛠️ Built With — Python Flask, NVIDIA NIM API, Vanilla JS
 
 | Layer | Technology |
 |-------|-----------|
