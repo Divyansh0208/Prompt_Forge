@@ -21,7 +21,7 @@
 
 ## 🚀 Live Demo
 
-**[→ Try Prompt Forge Live]([https://your-deployed-url.com](https://prompt-forge-o970.onrender.com))** _(deploy and replace this URL)_
+**[→ Try Prompt Forge Live](https://prompt-forge-o970.onrender.com)**
 
 ---
 
