@@ -34,7 +34,7 @@ Paste a weak prompt → Hit Forge It → Watch the magic ✨
 
 ### ⚔️ Forge Interface — Prompt Engineering Tool with NVIDIA Llama 3.1
 
-![Prompt Forge Interface](screenshots/prompt-forge.jpg)
+![Prompt Forge Interface](screenshot/prompt-forge.jpg)
 
 ---
 
