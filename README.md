@@ -1,26 +1,64 @@
-# ⚔ Prompt Forge
+<div align="center">
 
-> **Forge Elite Prompts — Mini Challenge · I am a Prompt Warrior**
+  <img src="https://img.shields.io/badge/Prompt_Forge-⚔️_Elite_Prompt_Engine-7B3FED?style=for-the-badge&logo=nvidia&logoColor=white" alt="Prompt Forge"/>
 
-Prompt Forge is a single-page web app that transforms weak, vague prompts into powerful, production-ready prompts using **NVIDIA Llama 3.1 70B**. Paste in a rough idea, hit **Forge It**, and get back a structurally complete prompt with a power score, technique breakdown, and a Warrior Analysis explaining every upgrade made.
+  <h1>⚔️ Prompt Forge</h1>
+  <p><strong>Transform weak prompts into elite, production-ready prompts using NVIDIA Llama 3.1 70B</strong></p>
 
-Built for **Google Prompt Wars 2026**.
+  <p>
+    <img src="https://img.shields.io/badge/Built_for-Google_Prompt_Wars_2026-FF6D00?style=for-the-badge" alt="Prompt Wars 2026"/>
+    <img src="https://img.shields.io/badge/Model-Llama_3.1_70B-76B900?style=for-the-badge&logo=nvidia" alt="Llama 3.1 70B"/>
+    <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License"/>
+    <img src="https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python" alt="Python"/>
+    <img src="https://img.shields.io/badge/Flask-Backend-black?style=for-the-badge&logo=flask" alt="Flask"/>
+  </p>
+
+  <p><em>Paste a rough idea → Hit "Forge It" → Get an elite prompt with power scoring, technique breakdown, and Warrior Analysis ✨</em></p>
+
+</div>
 
 ---
 
-## ✨ Features
+## 🚀 Live Demo
 
-- **Prompt Forging** — Rewrites any weak prompt into a detailed, elite-grade version (3–8× longer) using Llama 3.1 70B Instruct via the NVIDIA API
-- **8 Technique Tags** — Detects and highlights which prompt engineering techniques were applied:
-  - `Context` · `Specificity` · `Constraints` · `Output Format` · `Persona` · `Examples` · `Chain-of-Thought` · `Negatives`
-- **Power Level Meter** — Scores the upgrade from 1–10, visualised as a 10-bar indicator
-- **Warrior Rank System** — Earn a rank based on your power level: `RECRUIT` → `BRONZE` → `SILVER` → `GOLD` → `LEGENDARY`
-- **Warrior Analysis Panel** — A 2–3 sentence explanation of the key improvements made to your prompt
-- **Typewriter Output Animation** — Forged prompt streams in character-by-character for dramatic effect
-- **Copy to Clipboard** — One-click copy of the forged prompt
-- **Quick-Fill Examples** — Pre-loaded starter prompts: blog post, explain ML, resume help, marketing ideas
-- **Keyboard Shortcut** — `Ctrl + Enter` / `Cmd + Enter` to forge
-- **Responsive Design** — Fully usable on mobile and tablet screens
+**[→ Try Prompt Forge Live]([https://your-deployed-url.com](https://prompt-forge-o970.onrender.com))** _(deploy and replace this URL)_
+
+---
+
+## 🛠️ Built With — Prompt Forging Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Vanilla HTML / CSS / JavaScript (single file) |
+| Backend | Python · Flask · python-dotenv · requests |
+| AI Model | NVIDIA Llama 3.1 70B Instruct (`meta/llama-3.1-70b-instruct`) |
+| API | NVIDIA NIM API |
+| Fonts | Bebas Neue · DM Sans · DM Mono (Google Fonts) |
+
+---
+
+## ✨ Features — Prompt Forging, Technique Detection, Power Scoring
+
+**Prompt Forging Engine** — Rewrites any weak prompt into a detailed, elite-grade version (3–8× longer) using Llama 3.1 70B Instruct via the NVIDIA NIM API.
+
+**8 Prompt Engineering Technique Tags** — Detects and highlights which techniques were applied:
+`Context` · `Specificity` · `Constraints` · `Output Format` · `Persona` · `Examples` · `Chain-of-Thought` · `Negatives`
+
+**Power Level Meter (1–10)** — Scores the upgrade from 1–10, visualised as a 10-bar indicator.
+
+**Warrior Rank System** — Earn a rank based on your power level: `RECRUIT` → `BRONZE` → `SILVER` → `GOLD` → `LEGENDARY`
+
+**Warrior Analysis Panel** — A 2–3 sentence explanation of every key improvement made to your prompt.
+
+**Typewriter Output Animation** — Forged prompt streams in character-by-character for dramatic effect.
+
+**One-Click Copy** — Instantly copy the forged prompt to clipboard.
+
+**Quick-Fill Examples** — Pre-loaded starters: blog post, explain ML, resume help, marketing ideas.
+
+**Keyboard Shortcut** — `Ctrl + Enter` / `Cmd + Enter` to forge instantly.
+
+**Responsive Design** — Fully usable on mobile and tablet screens.
 
 ---
 
@@ -29,7 +67,7 @@ Built for **Google Prompt Wars 2026**.
 ```
 prompt_forge/
 ├── prompt_warrior.html   # Frontend — single-file UI (HTML + CSS + JS)
-├── server.py             # Backend — Flask proxy to the NVIDIA API
+├── server.py             # Backend — Flask proxy to the NVIDIA NIM API
 ├── .env                  # Your API key (never committed)
 ├── .env.example          # Template for environment setup
 ├── .gitignore            # Standard Python/IDE ignore rules
@@ -38,33 +76,23 @@ prompt_forge/
 
 ---
 
-## 🛠 Tech Stack
-
-| Layer     | Technology                                      |
-|-----------|-------------------------------------------------|
-| Frontend  | Vanilla HTML / CSS / JavaScript (single file)   |
-| Backend   | Python · Flask · python-dotenv · requests       |
-| AI Model  | NVIDIA Llama 3.1 70B Instruct (`meta/llama-3.1-70b-instruct`) |
-| API       | [NVIDIA NIM API](https://build.nvidia.com/)     |
-| Fonts     | Bebas Neue · DM Sans · DM Mono (Google Fonts)   |
-
----
-
-## 🚀 Getting Started
+## 🚀 Getting Started — Quick Setup Guide for Prompt Forge
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/prompt_forge.git
-cd prompt_forge
+git clone https://github.com/Divyansh0208/Prompt_Forge.git
+cd Prompt_Forge
 ```
 
-### 2. Create and activate a virtual environment (recommended)
+### 2. Create and activate a virtual environment
 
 ```bash
 python -m venv venv
+
 # macOS / Linux
 source venv/bin/activate
+
 # Windows
 venv\Scripts\activate
 ```
@@ -83,11 +111,11 @@ cp .env.example .env
 
 Open `.env` and add your NVIDIA API key:
 
-```env
+```
 NVIDIA_API_KEY=your-nvidia-api-key-here
 ```
 
-> Get your free API key at [build.nvidia.com](https://build.nvidia.com/).
+Get your free API key at [build.nvidia.com](https://build.nvidia.com).
 
 ### 5. Run the server
 
@@ -97,41 +125,41 @@ python server.py
 
 ### 6. Open the app
 
-Visit [http://localhost:8000](http://localhost:8000) in your browser.
+Visit `http://localhost:8000` in your browser.
 
 ---
 
 ## 🔑 Environment Variables
 
-| Variable         | Required | Description                                      |
-|------------------|----------|--------------------------------------------------|
-| `NVIDIA_API_KEY` | ✅ Yes   | API key from [build.nvidia.com](https://build.nvidia.com/) |
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `NVIDIA_API_KEY` | ✅ Yes | API key from [build.nvidia.com](https://build.nvidia.com) |
 
-The API key is loaded server-side via `python-dotenv` and is never exposed to the browser.
+The API key is loaded server-side via `python-dotenv` and is **never exposed to the browser**.
 
 ---
 
-## 🧠 How It Works
+## 🧠 How It Works — Prompt Forging Pipeline Explained
 
-1. You enter a weak or rough prompt in the left panel.
-2. On clicking **Forge It**, the frontend sends a `POST /api/forge` request to the Flask server.
-3. The Flask server forwards the request to the NVIDIA NIM API with a detailed system prompt instructing Llama 3.1 70B to act as a master prompt engineer.
-4. The model returns a structured JSON response containing:
+1. Enter a weak or rough prompt in the left panel.
+2. Click **Forge It** — frontend sends `POST /api/forge` to the Flask server.
+3. Flask forwards the request to the **NVIDIA NIM API** with a detailed system prompt instructing Llama 3.1 70B to act as a master prompt engineer.
+4. The model returns a structured JSON response:
    - `forged_prompt` — the upgraded prompt text
    - `techniques_used` — list of techniques applied
    - `power_level` — integer score from 1 to 10
    - `analysis` — explanation of improvements
-5. The frontend parses the response and renders the forged prompt with a typewriter animation, lights up the relevant technique tags, fills the power meter, assigns a Warrior Rank, and shows the Warrior Analysis.
+5. Frontend renders the forged prompt with typewriter animation, lights up technique tags, fills the power meter, assigns a Warrior Rank, and shows the Warrior Analysis.
 
 ---
 
-## 📡 API Reference
+## 📡 API Reference — NVIDIA NIM Proxy Endpoint
 
 ### `POST /api/forge`
 
-Proxies a chat completion request to the NVIDIA API.
+Proxies a chat completion request to the NVIDIA NIM API.
 
-**Request Body** (forwarded directly to NVIDIA):
+**Request Body:**
 
 ```json
 {
@@ -144,27 +172,37 @@ Proxies a chat completion request to the NVIDIA API.
 }
 ```
 
-**Response**: Standard NVIDIA/OpenAI-compatible chat completion object.
+**Response:** Standard NVIDIA/OpenAI-compatible chat completion object.
 
 ---
 
-## 🎖 Warrior Rank Scale
+## 🎖 Warrior Rank Scale — Prompt Power Level System
 
-| Power Level | Rank       |
-|-------------|------------|
-| 0           | —          |
-| 1 – 2       | RECRUIT    |
-| 3 – 4       | BRONZE     |
-| 5 – 6       | SILVER     |
-| 7 – 8       | GOLD       |
-| 9 – 10      | LEGENDARY  |
-
----
-
-## 📜 License
-
-This project was created as part of **Google Prompt Wars 2026**. Feel free to fork and build upon it.
+| Power Level | Warrior Rank |
+|-------------|-------------|
+| 0 | — |
+| 1 – 2 | 🪖 RECRUIT |
+| 3 – 4 | 🥉 BRONZE |
+| 5 – 6 | 🥈 SILVER |
+| 7 – 8 | 🥇 GOLD |
+| 9 – 10 | 🏆 LEGENDARY |
 
 ---
 
-<p align="center">Powered by <strong>NVIDIA Llama 3.1 70B</strong></p>
+## 🤝 Contributing
+
+Contributions are welcome! Fork the repo, make your changes, and open a pull request. For major changes, open an issue first to discuss what you'd like to change.
+
+---
+
+## 📜 License — MIT License for Open Source
+
+This project is licensed under the [MIT License](LICENSE).
+
+Created for **Google Prompt Wars 2026**.
+
+---
+
+<div align="center">
+  <strong>Powered by NVIDIA Llama 3.1 70B · Built with ⚔️ by <a href="https://github.com/Divyansh0208">Divyansh0208</a></strong>
+</div>
