@@ -39,7 +39,7 @@ app = Flask(__name__, static_folder=None)
 
 @app.get("/")
 def index():
-    return send_from_directory("static", "prompt_warrior.html")
+    return send_from_directory(".", "prompt_warrior.html")
 
 
 @app.post("/api/forge")
