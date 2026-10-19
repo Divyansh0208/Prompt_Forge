@@ -538,63 +538,15 @@ async function forgePrompt() {
 
   outputBox.innerHTML = '<div class="output-placeholder" id="placeholder"><span class="loading-text">Heating the forge...</span></div>';
 
-  const systemPrompt = `You are a master prompt engineer — a "Prompt Warrior". Your job is to transform weak, vague prompts into powerful, elite prompts.
-
-You MUST respond with ONLY valid JSON — no markdown, no backticks, no preamble. Format:
-{
-  "forged_prompt": "the upgraded prompt text here",
-  "techniques_used": ["context","specificity","constraints","format","persona","examples","cot","negatives"],
-  "power_level": 7,
-  "analysis": "2-3 sentence explanation of the key improvements made"
-}
-
-Technique definitions (only list ones actually used):
-- context: added background info or purpose
-- specificity: made the request more precise and detailed  
-- constraints: added limits (length, tone, audience, scope)
-- format: specified output format (list, table, markdown, etc.)
-- persona: added role or persona for the AI
-- examples: added examples or few-shot patterns
-- cot: added chain-of-thought or step-by-step reasoning instruction
-- negatives: added what NOT to do
-
-power_level: integer 1-10 based on how much you improved the prompt.
-The forged_prompt should be substantive and impressive — 3-8x longer than the original.`;
-
   try {
     const response = await fetch("/api/forge", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: "meta/llama-3.1-70b-instruct",
-        max_tokens: 1000,
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: `Weak prompt to forge: "${weak}"` }
-        ]
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ weak })
     });
 
-    const data = await response.json();
-
-    // Check if the API returned an error
-    if (!response.ok) {
-      const errMsg = data.error?.message || data.error || JSON.stringify(data);
-      throw new Error(`API error (${response.status}): ${errMsg}`);
-    }
-
-    const raw = data.choices?.[0]?.message?.content || '';
-
-    let parsed;
-    try {
-      const clean = raw.replace(/```json|```/g, '').trim();
-      parsed = JSON.parse(clean);
-    } catch(e) {
-      console.log('Raw LLM response:', raw);
-      throw new Error('Could not parse LLM response. Check console for raw output.');
-    }
+    const parsed = await response.json();
+    if (!response.ok) throw new Error(`API error (${response.status}): ${parsed.error || 'unknown'}`);
 
     forgedPromptText = parsed.forged_prompt || '';
 
