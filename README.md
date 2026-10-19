@@ -44,7 +44,7 @@ Paste a weak prompt → Hit Forge It → Watch the magic ✨
 |-------|-----------|
 | Frontend | Vanilla HTML / CSS / JavaScript (single file) |
 | Backend | Python · Flask · python-dotenv · requests |
-| AI Model | Configurable via `NVIDIA_MODEL` (default `deepseek-ai/deepseek-v4.1-flash`) |
+| AI Model | Configurable via `NVIDIA_MODEL` (default `nvidia/nemotron-3.5-lightning-30b-a3b`) |
 | API | NVIDIA NIM API |
 | Fonts | Bebas Neue · DM Sans · DM Mono (Google Fonts) |
 
@@ -128,7 +128,7 @@ Open `.env` and add your NVIDIA API key:
 
 ```
 NVIDIA_API_KEY=your-nvidia-api-key-here
-# optional: NVIDIA_MODEL=deepseek-ai/deepseek-v4.1-flash
+# optional: NVIDIA_MODEL=nvidia/nemotron-3.5-lightning-30b-a3b
 ```
 
 Get your free API key at [build.nvidia.com](https://build.nvidia.com).
@@ -152,7 +152,7 @@ Visit `http://localhost:8000` in your browser.
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `NVIDIA_API_KEY` | ✅ Yes | API key from [build.nvidia.com](https://build.nvidia.com) |
-| `NVIDIA_MODEL` | No | Model ID (default `deepseek-ai/deepseek-v4.1-flash`). Change it if NVIDIA retires the model. |
+| `NVIDIA_MODEL` | No | Model ID (default `nvidia/nemotron-3.5-lightning-30b-a3b`). Change it if NVIDIA retires the model. |
 
 The API key is loaded server-side via `python-dotenv` and is **never exposed to the browser**.
 
