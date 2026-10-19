@@ -9,7 +9,7 @@ from flask import Flask, jsonify, request, send_from_directory
 load_dotenv()
 
 NVIDIA_API_KEY = os.environ["NVIDIA_API_KEY"]  # fail fast if missing
-MODEL = os.getenv("NVIDIA_MODEL", "deepseek-ai/deepseek-v4.1-flash")
+MODEL = os.getenv("NVIDIA_MODEL", "nvidia/nemotron-3.5-lightning-30b-a3b")
 
 SYSTEM_PROMPT = """You are a master prompt engineer — a "Prompt Warrior". Your job is to transform weak, vague prompts into powerful, elite prompts.
 
@@ -54,6 +54,7 @@ def forge():
             json={
                 "model": MODEL,
                 "max_tokens": 2000,
+                "chat_template_kwargs": {"enable_thinking": False},
                 "messages": [
                     {"role": "system", "content": SYSTEM_PROMPT},
                     {"role": "user", "content": f"Weak prompt to forge:\n<<<\n{weak}\n>>>"},
